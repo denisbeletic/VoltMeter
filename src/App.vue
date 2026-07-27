@@ -1,4 +1,8 @@
-<script setup></script>
+<script setup>
+  import { RouterLink, RouterView } from 'vue-router'
+  import { useCounterStore } from "./stores/counter.js"
+  const counterStore = useCounterStore();
+</script>
 
 <template>
   <h1>You did it!</h1>
@@ -8,4 +12,6 @@
   </p>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>
