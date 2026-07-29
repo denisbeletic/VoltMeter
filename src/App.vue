@@ -1,15 +1,14 @@
 <script setup>
   import { RouterLink, RouterView } from 'vue-router'
   import { useCounterStore } from "./stores/counter.js"
+  
   const counterStore = useCounterStore();
+  
+  import Header from './components/Header.vue';
 </script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <Header></Header>
 </template>
 
 <style scoped>
