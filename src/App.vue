@@ -1,14 +1,11 @@
 <script setup>
-  import { RouterLink, RouterView } from 'vue-router'
-  import { useCounterStore } from "./stores/counter.js"
-  
-  const counterStore = useCounterStore();
-  
-  import Header from './components/Header.vue';
+  import { RouterView } from 'vue-router';
 </script>
 
 <template>
-  <Header></Header>
+    <div class="bg-linear-to-br from-indigo-300 from-10% to-emerald-300 min-h-screen">
+        <RouterView></RouterView>
+    </div>
 </template>
 
 <style scoped>

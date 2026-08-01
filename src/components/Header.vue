@@ -1,77 +1,30 @@
 <script setup>
-    // TODO: Dovrsiti sign up, login i deletion -> potrebno povezati sa formom, staviti formu u drugu .vue datoteku...
+    // TODO: Ubacivanje MM-a, povezati spremljena MM sa Firebase-om
     import { ref } from 'vue';
-    import {
-        createUserWithEmailAndPassword,
-        signInWithEmailAndPassword,
-        deleteUser,
-        onAuthStateChanged
-     } from 'firebase/auth';
-    import { auth } from '@/firebase';
-    import { User } from 'lucide-vue-next';
+    import { RouterLink } from 'vue-router';
+    import { watchAuthStateChange } from '@/composables/watchAuthStateChange';
+    import { User, Zap } from 'lucide-vue-next';
 
-    const test = () => alert('Button test...')
-
-    const user = ref(null)
-    const email = ref('abcd@gmail.com')
-    const password = ref('abcd123')
-
-    onAuthStateChanged(auth, (currentUser) => {
-        if (currentUser) {
-            user.value = currentUser
-        } else {
-            user.value = null
-        }
-    })
-
-    const registerUser = async () => {
-        try {
-            const userCredential = await createUserWithEmailAndPassword(auth, email.value, password.value)
-            alert("Uspješno ste se registrirali.")
-        } catch (error) {
-            alert("Error: " + error.message)
-        }
-    }
-
-    const loginUser = async () => {
-        try {
-            if (user) {
-                throw new Error("Već ste prijavljeni!")
-            }
-
-            const userCredential = await signInWithEmailAndPassword(auth, email.value, password.value)
-            alert("Uspješno ste se prijavili.")
-        } catch (error) {
-            alert("Error: " + error.message)
-        }
-    }
-    
-    const removeUser = async () => {
-        try {
-            const userDeletion = await deleteUser(auth.currentUser)
-            alert("Uspješno ste obrisali račun.")
-        } catch (error) {
-            alert("Error: " + error.message)
-        }
-    }
+    const user = watchAuthStateChange()
 </script>
 
 <template>
-    <header class="flex flex-row items-center justify-between bg-neutral-600 py-4 px-12">
-        <div class="text-2xl font-bold">
-            <span class="text-white">Volt</span>
-            <span class="text-emerald-500">Meter</span>
+    <header class="flex flex-row items-center justify-between bg-neutral-600 py-4 px-12 fixed w-full">
+        <div class="flex flex-row items-center gap-5">
+            <RouterLink to="/" class="flex flex-row items-center justify-center text-2xl font-bold hover:bg-neutral-500 rounded-2xl py-1 px-2">
+                <span class="text-white">Volt</span>
+                <span class="text-emerald-500">Meter</span>
+                <Zap color="yellow" fill="yellow" class="ml-1"></Zap>
+            </RouterLink>
+            <slot name="Slot1"></slot>  <!-- TODO: implementiraj tipke na ovim slotovima -->
+            <slot name="Slot2"></slot>
         </div>
-        <button class="border-3 rounded-2xl p-1 border-white hover:bg-neutral-500" @click="loginUser">
-            <User size="35" color="white"></User>
-        </button>
-        <button class="border-3 rounded-2xl p-1 border-white hover:bg-neutral-500" @click="registerUser">
-            <User size="35" color="yellow"></User>
-        </button>
-        <button class="border-3 rounded-2xl p-1 border-white hover:bg-neutral-500" @click="removeUser">
-            <User size="35" color="red"></User>
-        </button>
-        <span v-if="user" class="text-emerald-600"> Prijavljen korisnik: <b>{{ user.email }}</b> </span>
+        <div class="flex flex-row items-center gap-10">
+            <span v-if="user" class="text-emerald-600"> Prijavljen korisnik: <b>{{ user.email }}</b> </span>
+            <RouterLink to="/login" class="border-3 rounded-2xl p-1 border-white hover:bg-neutral-500">
+                <User size="35" color="white"></User>
+            </RouterLink>
+        </div>
     </header>
     <div class="bg-neutral-400 h-1"></div>
 </template>
