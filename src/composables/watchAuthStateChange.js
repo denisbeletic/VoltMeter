@@ -5,7 +5,7 @@ import { auth } from '@/firebase';
 export function watchAuthStateChange() {
     const user = ref(null)
 
-    onAuthStateChanged(auth, (currentUser) => {
+    onAuthStateChanged(auth, (currentUser) => { // onAuthStateChanged je ASYNC operacija!
         if (currentUser) {
             user.value = currentUser
         } else {

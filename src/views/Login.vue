@@ -63,18 +63,18 @@
                 <form @submit.prevent="loginUser" class="flex flex-col items-center justify-center">
                     <p class="text-xl font-bold text-emerald-600 mb-5">Prijava</p>
                     <label class="mb-3">Upišite e-mail adresu:</label>
-                    <input v-model="emailLogin" type="text" class="bg-neutral-200 border rounded-lg px-2 mb-3">
+                    <input v-model="emailLogin" type="text" class="bg-neutral-200 border rounded-lg px-2 py-1 mb-3">
                     <label class="mb-3">Upišite lozinku:</label>
-                    <input v-model="passwordLogin" type="password" class="bg-neutral-200 border rounded-lg px-2 mb-3">
+                    <input v-model="passwordLogin" type="password" class="bg-neutral-200 border rounded-lg px-2 py-1 mb-3">
                     <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 w-full rounded-lg font-bold text-white py-0.5 mt-0.5">Prijavi se</button>
                 </form>
                 <div class="w-0.5 bg-neutral-600"></div>
                 <form @submit.prevent="registerUser" class="flex flex-col items-center justify-center">
                     <p class="text-xl font-bold text-amber-600 mb-5">Registracija</p>
                     <label class="mb-3">Upišite e-mail adresu:</label>
-                    <input v-model="emailRegister" type="text" class="bg-neutral-200 border rounded-lg px-2 mb-3">
+                    <input v-model="emailRegister" type="text" class="bg-neutral-200 border rounded-lg px-2 py-1 mb-3">
                     <label class="mb-3">Upišite lozinku:</label>
-                    <input v-model="passwordRegister" type="password" class="bg-neutral-200 border rounded-lg px-2 mb-3">
+                    <input v-model="passwordRegister" type="password" class="bg-neutral-200 border rounded-lg px-2 py-1 mb-3">
                     <button type="submit" class="bg-amber-600 hover:bg-amber-500 w-full rounded-lg font-bold text-white py-0.5 mt-0.5">Registriraj se</button>
                 </form>
             </div>

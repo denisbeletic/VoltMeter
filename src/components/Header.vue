@@ -1,11 +1,21 @@
 <script setup>
-    // TODO: Ubacivanje MM-a, povezati spremljena MM sa Firebase-om
-    import { ref } from 'vue';
-    import { RouterLink } from 'vue-router';
+    import { onMounted, ref } from 'vue';
+    import { useRouter, RouterLink } from 'vue-router';
     import { watchAuthStateChange } from '@/composables/watchAuthStateChange';
     import { User, Zap } from 'lucide-vue-next';
+    import { onAuthStateChanged } from 'firebase/auth';
+    import { auth } from '@/firebase';
 
     const user = watchAuthStateChange()
+    const router = useRouter()
+
+    onMounted(() => {
+        onAuthStateChanged(auth, (user) => {    // force-redirect na login ako niste prijavljeni
+            if (!user) {
+                router.push('/login')
+            }
+        })
+    })
 </script>
 
 <template>
