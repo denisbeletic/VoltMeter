@@ -1,6 +1,7 @@
 import KreirajMM from '@/views/KreirajMM.vue'
 import Login from '@/views/Login.vue'
 import OdabirMM from '@/views/OdabirMM.vue'
+import PregledMM from '@/views/PregledMM.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -10,6 +11,12 @@ const router = createRouter({
         path: '/',
         name: 'odabirmm',
         component: OdabirMM
+      },
+      {
+        path: '/pregledmm/:mm_uid',
+        name: 'pregledmm',
+        component: PregledMM,
+        props: true
       },
       {
         path: '/login',

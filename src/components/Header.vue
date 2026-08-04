@@ -9,6 +9,12 @@
     const user = watchAuthStateChange()
     const router = useRouter()
 
+    const handleClick = () => {     // reload stranice ako smo na /, inace preusmjeri na /
+        if (router.currentRoute.value.path == "/") {
+            location.reload()
+        }
+    }
+
     onMounted(() => {
         onAuthStateChanged(auth, (user) => {    // force-redirect na login ako niste prijavljeni
             if (!user) {
@@ -16,12 +22,13 @@
             }
         })
     })
+    
 </script>
 
 <template>
     <header class="flex flex-row items-center justify-between bg-neutral-600 py-4 px-12 fixed w-full">
         <div class="flex flex-row items-center gap-5">
-            <RouterLink to="/" class="flex flex-row items-center justify-center text-2xl font-bold hover:bg-neutral-500 rounded-2xl py-1 px-2">
+            <RouterLink to="/" @click="handleClick" class="flex flex-row items-center justify-center text-2xl font-bold hover:bg-neutral-500 rounded-2xl py-1 px-2">
                 <span class="text-white">Volt</span>
                 <span class="text-emerald-500">Meter</span>
                 <Zap color="yellow" fill="yellow" class="ml-1"></Zap>

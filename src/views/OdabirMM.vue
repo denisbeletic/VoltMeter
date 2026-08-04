@@ -1,25 +1,13 @@
 <script setup>
-    // TODO: Pregled ubacenih MM-a, doraditi firebase strukturu
+    // TODO: Doraditi firebase strukturu, napraviti pregled pojedinog mm-a
     import Header from '@/components/Header.vue';
     import { getDocs, collection } from 'firebase/firestore';
-    import { onMounted, ref, /*watchEffect*/ } from 'vue';
-    import { RouterLink, RouterView } from 'vue-router';
+    import { onMounted, ref } from 'vue';
+    import { RouterLink } from 'vue-router';
     import { db } from '@/firebase';
-    // import { useCounterStore } from '@/stores/counter';
-    // import { watchAuthStateChange } from '@/composables/watchAuthStateChange';
-    
-    // const user = watchAuthStateChange()
-    // const counterStore = useCounterStore();
-
-    // watchEffect(() => {
-        //     if (snapshot.value != null) {
-            //         // console.log(snapshot.value.docs[0].data())
-            //         // console.log(snapshot.value.docs)
-            //     }
-            // })
             
     const snapshot = ref(null)
-    const data = ref({})
+    const OMM_data = ref([])
     
     onMounted(async () => {
         const firestore_dokumenti = await getDocs(collection(db, "mjerna_mjesta"))
@@ -27,8 +15,7 @@
 
         for (const item of snapshot.value.docs) {
             const podaci = item.data()  // data() vraca objekt
-            data.value[item.id] = podaci
-            console.log(data.value)
+            OMM_data.value.push(podaci)
         }
     })
 
@@ -43,11 +30,21 @@
     <br>
     <br>
     <br>
-    <p class="flex flex-row items-center text-center justify-center bg-white">AAA</p>
-    <div v-if="snapshot">
-        <div v-for="item in data" class="flex flex-row w-fit h-fit justify-center items-center bg-red-500">
-            <p>{{ item }}</p>
-        </div>
+    <div v-if="snapshot" class="flex flex-row gap-5 mx-5 my-5">
+        <RouterLink :to="`/pregledmm/${item.uid}`" v-for="item in OMM_data" class="flex flex-row justify-center items-center border-3 border-neutral-600 px-5 py-3 rounded-2xl bg-white hover:border-amber-500 text-lg gap-3">
+            <div class="flex flex-col text-right font-bold text-emerald-600">
+                <p>Adresa:</p>
+                <p>OMM:</p>
+                <p>Snaga:</p>
+                <p>TM:</p>
+            </div>
+            <div class="flex flex-col text-left">
+                <p>{{ item.adresa }}</p>
+                <p>{{ item.OMM }}</p>
+                <p>{{ item.snaga }}</p>
+                <p>{{ item.TM }}</p>
+            </div>
+        </RouterLink>
     </div>
 </template>
 
