@@ -22,6 +22,7 @@
             await updateDoc(novo_mm, {  // spremamo firebaseov id unutar tijela dokumenta
                 uid: novo_mm.id
             })
+            
             alert("Dodano MM!")
         } catch (error) {
             alert("Error: " + error.message)

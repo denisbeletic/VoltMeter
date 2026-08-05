@@ -1,5 +1,4 @@
 <script setup>
-    // TODO: Doraditi firebase strukturu, napraviti pregled pojedinog mm-a
     import Header from '@/components/Header.vue';
     import { getDocs, collection } from 'firebase/firestore';
     import { onMounted, ref } from 'vue';
