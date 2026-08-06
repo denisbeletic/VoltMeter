@@ -37,6 +37,7 @@
                 <p>Snaga:</p>
                 <p>TM:</p>
             </div>
+            <div class="flex flex-col shrink-0 bg-neutral-600 w-0.5 h-full"></div>
             <div class="flex flex-col text-left">
                 <p>{{ item.adresa }}</p>
                 <p>{{ item.OMM }}</p>
