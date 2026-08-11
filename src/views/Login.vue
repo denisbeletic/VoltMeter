@@ -1,7 +1,7 @@
 <script setup>
     import Header from '@/components/Header.vue';
     import { watchAuthStateChange } from '@/composables/watchAuthStateChange';
-    import { ref } from 'vue';
+    import { onMounted, ref } from 'vue';
     import {
         createUserWithEmailAndPassword,
         signInWithEmailAndPassword,
@@ -10,7 +10,10 @@
     } from 'firebase/auth';
     import { auth } from '@/firebase';
 
-    const user = watchAuthStateChange()
+    onMounted(async () => {
+        const user = watchAuthStateChange()
+    })
+
     const emailRegister = ref('')
     const passwordRegister = ref('')
     const emailLogin = ref('')
@@ -41,14 +44,20 @@
         passwordLogin.value = ''
     }   
     const logoutUser = () => {
-        signOut(auth)
-        alert("Uspješno ste se odjavili.")
+        try {
+            signOut(auth)
+            alert("Uspješno ste se odjavili.")
+            location.reload()
+        } catch (error) {
+            alert("Error: " + error.message)
+        }
     }
 
     const removeUser = async () => {
         try {
             const userDeletion = await deleteUser(auth.currentUser)
             alert("Uspješno ste obrisali račun.")
+            location.reload()
         } catch (error) {
             alert("Error: " + error.message)
         }
@@ -78,7 +87,7 @@
                     <button type="submit" class="bg-amber-600 hover:bg-amber-500 w-full rounded-lg font-bold text-white py-0.5 mt-0.5">Registriraj se</button>
                 </form>
             </div>
-            <div v-if="user" class="flex flex-col">
+            <div v-if="auth.currentUser" class="flex flex-col">
                 <div class="flex flex-row items-center justify-center mt-5 mb-3">
                     <div class="w-full h-0.5 bg-neutral-600"></div>
                 </div>

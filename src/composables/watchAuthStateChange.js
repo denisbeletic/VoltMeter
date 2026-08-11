@@ -1,17 +1,12 @@
-import { ref } from 'vue';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from '@/firebase';
 
 export function watchAuthStateChange() {
-    const user = ref(null)
-
-    onAuthStateChanged(auth, (currentUser) => { // onAuthStateChanged je ASYNC operacija!
-        if (currentUser) {
-            user.value = currentUser
-        } else {
-            user.value = null
-        }
+    return new Promise((resolve) => {
+        onAuthStateChanged(auth, (currentUser) => {
+            if (currentUser) {
+                resolve(currentUser)
+            }
+        })
     })
-    
-    return user 
 }

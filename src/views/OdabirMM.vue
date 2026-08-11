@@ -4,20 +4,26 @@
     import { onMounted, ref } from 'vue';
     import { RouterLink } from 'vue-router';
     import { db } from '@/firebase';
-            
+    import { watchAuthStateChange } from '@/composables/watchAuthStateChange';
+
     const snapshot = ref(null)
     const OMM_data = ref([])
     
     onMounted(async () => {
-        const firestore_dokumenti = await getDocs(collection(db, "mjerna_mjesta"))
-        snapshot.value = firestore_dokumenti
+        try {
+            const user = await watchAuthStateChange()   // user je firebase object
+            
+            const firestore_dokumenti = await getDocs(collection(db, "users", user.uid, "mjerna_mjesta"))
+            snapshot.value = firestore_dokumenti
 
-        for (const item of snapshot.value.docs) {
-            const podaci = item.data()  // data() vraca objekt
-            OMM_data.value.push(podaci)
+            for (const item of snapshot.value.docs) {
+                const podaci = item.data()
+                OMM_data.value.push(podaci)
+            }
+        } catch (error) {
+            console.error('Error: ', error)
         }
     })
-
 </script>
 
 <template>

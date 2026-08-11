@@ -3,28 +3,31 @@
     import { useRoute } from 'vue-router';
     import { db } from '@/firebase';
     import { doc, collection, addDoc, deleteDoc } from 'firebase/firestore';
+    import { watchAuthStateChange } from '@/composables/watchAuthStateChange';
 
     const route = useRoute()
 
     const dodajUredaj = async () => { 
         try {
-            const novi_uredaj = await addDoc(collection(db, "mjerna_mjesta", route.params.mm_uid, "uredaji"), {
+            const user = await watchAuthStateChange()
+            const novi_uredaj = await addDoc(collection(db, "users", user.uid, "mjerna_mjesta", route.params.mm_uid, "uredaji"), {
                 ikona: "Zap",
                 snaga_uredaja: 1.5,
                 vrijeme_koristenja: 24
             }) 
-
+            
             alert("Dodan uređaj!")
         } catch (error) {
             alert("Error: " + error.message)
         }
     }
-
-    // target_document_id je dokument (UID uredaja) kojeg zelis brisati 
-
+    
+    
     const ukloniUredaj = async () => { 
         try {
-            await deleteDoc(doc(db, "mjerna_mjesta", route.params.mm_uid, "uredaji", target_document_id))
+            const user = await watchAuthStateChange()
+            await deleteDoc(doc(db, "users", user.uid, "mjerna_mjesta", route.params.mm_uid, "uredaji", target_document_id))
+            // target_document_id je dokument (UID uredaja) kojeg zelis brisati 
 
             alert("Uređaj uklonjen!")
         } catch (error) {

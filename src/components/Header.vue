@@ -1,14 +1,12 @@
 <script setup>
-    import { onMounted, ref } from 'vue';
+    import { onMounted } from 'vue';
     import { useRouter, RouterLink } from 'vue-router';
-    import { watchAuthStateChange } from '@/composables/watchAuthStateChange';
     import { User, Zap } from 'lucide-vue-next';
     import { onAuthStateChanged } from 'firebase/auth';
     import { auth } from '@/firebase';
 
-    const user = watchAuthStateChange()
     const router = useRouter()
-
+    
     const handleClick = () => {     // reload stranice ako smo na /, inace preusmjeri na /
         if (router.currentRoute.value.path == "/") {
             location.reload()
@@ -22,7 +20,6 @@
             }
         })
     })
-    
 </script>
 
 <template>
@@ -37,7 +34,6 @@
             <slot name="Slot2"></slot>
         </div>
         <div class="flex flex-row items-center gap-10">
-            <span v-if="user" class="text-emerald-600"> Prijavljen korisnik: <b>{{ user.email }}</b> </span>
             <RouterLink to="/login" class="border-3 rounded-2xl p-1 border-white hover:bg-neutral-500">
                 <User size="35" color="white"></User>
             </RouterLink>

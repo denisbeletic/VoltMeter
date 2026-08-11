@@ -2,17 +2,18 @@
     import Header from '@/components/Header.vue';
     import { ref } from 'vue';
     import { db } from '@/firebase';
-    import { addDoc, collection, updateDoc } from 'firebase/firestore';
+    import { addDoc, collection, updateDoc, Timestamp } from 'firebase/firestore';
+    import { watchAuthStateChange } from '@/composables/watchAuthStateChange';
     
     const adresa = ref('')
     const snaga = ref('')
     const OMM = ref('')
     const TM = ref('')
-
     
     const dodajMM = async (adresa, snaga, OMM, TM) => {
         try {
-            const novo_mm = await addDoc(collection(db, "mjerna_mjesta"), {
+            const user = await watchAuthStateChange()
+            const novo_mm = await addDoc(collection(db, "users", user.uid, "mjerna_mjesta"), {
                 adresa: adresa,
                 snaga: snaga,
                 OMM: OMM,
@@ -22,8 +23,23 @@
             await updateDoc(novo_mm, {  // spremamo firebaseov id unutar tijela dokumenta
                 uid: novo_mm.id
             })
+
+            const date_object = new Date("2000-01-01")
+            const firestore_timestamp = Timestamp.fromDate(date_object)
+            const novo_ocitanje = await addDoc(collection(db, "users", user.uid, "mjerna_mjesta", novo_mm.id, "ocitanja"), { // inicijalizacija ocitanja
+                date: firestore_timestamp,
+                VT: 0,
+                NT: 0,
+                P1: 0,
+                P2: 0
+            })
+
+            await updateDoc(novo_ocitanje, {  // spremamo firebaseov id unutar tijela dokumenta
+                uid: novo_ocitanje.id
+            })
             
             alert("Dodano MM!")
+            location.reload()
         } catch (error) {
             alert("Error: " + error.message)
         }

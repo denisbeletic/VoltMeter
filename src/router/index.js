@@ -4,7 +4,7 @@ import Login from '@/views/Login.vue'
 import OdabirMM from '@/views/OdabirMM.vue'
 import PregledMM from '@/views/PregledMM.vue'
 import PregledRacuna from '@/views/PregledRacuna.vue'
-import UnosOcitanja from '@/views/UnosOcitanja.vue'
+import UrediOcitanja from '@/views/UrediOcitanja.vue'
 import UrediUredaje from '@/views/UrediUredaje.vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
@@ -32,9 +32,9 @@ const router = createRouter({
         component: PregledMM,
       },
       {
-        path: '/pregledmm/:mm_uid/unosocitanja',
-        name: 'unosocitanja',
-        component: UnosOcitanja,
+        path: '/pregledmm/:mm_uid/urediocitanja',
+        name: 'urediocitanja',
+        component: UrediOcitanja,
       },
       {
         path: '/pregledmm/:mm_uid/urediuredaje',
