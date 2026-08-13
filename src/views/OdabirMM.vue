@@ -21,7 +21,7 @@
                 OMM_data.value.push(podaci)
             }
         } catch (error) {
-            console.error('Error: ', error)
+            alert("Error: " + error.message)
         }
     })
 </script>

@@ -101,7 +101,7 @@
                 item.date = date_string
             }
         } catch (error) {
-            console.error('Error: ', error)
+            alert("Error: " + error.message)
         }
     })
 
@@ -178,10 +178,10 @@
                     <div class="flex flex-col shrink-0 bg-neutral-600 w-0.5"></div>
                     <div class="flex flex-col text-left">
                         <p>{{ item.date }}</p>
-                        <p>{{ item.VT }}</p>
-                        <p>{{ item.NT }}</p>
-                        <p>{{ item.P1 }}</p>
-                        <p>{{ item.P2 }}</p>
+                        <p>{{ item.VT }}<span> kWh</span></p>
+                        <p>{{ item.NT }}<span> kWh</span></p>
+                        <p>{{ item.P1 }}<span> kW</span></p>
+                        <p>{{ item.P2 }}<span> kW</span></p>
                     </div>
                 </div>
                 <div class="w-full h-0.5 bg-neutral-600 my-2"></div>
