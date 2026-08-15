@@ -29,25 +29,27 @@
 <template>
     <Header>
         <template #Slot1>
-            <RouterLink to="/kreirajmm" class="bg-emerald-600 hover:bg-emerald-500 w-full rounded-lg font-bold text-white py-1 px-2">+ Dodaj novo MM</RouterLink>
+            <RouterLink to="/kreirajmm" class="bg-emerald-600 hover:bg-emerald-500 w-fit rounded-lg font-bold text-white py-1 px-2">+ Dodaj novo MM</RouterLink>
         </template>
     </Header>
     <br>
     <br>
     <br>
     <div v-if="snapshot" class="flex flex-row gap-5 mx-5 my-5">
-        <RouterLink :to="`/pregledmm/${item.uid}`" v-for="item in OMM_data" class="flex flex-row justify-center items-center border-3 border-neutral-600 px-5 py-3 rounded-2xl bg-white hover:border-amber-500 text-lg gap-3">
+        <RouterLink :to="`/pregledmm/${item.uid}`" v-for="item in OMM_data" class="flex flex-row justify-center items-center border-3 border-neutral-600 px-5 py-2 rounded-2xl bg-white hover:border-amber-500 text-lg gap-3">
             <div class="flex flex-col text-right font-bold text-emerald-600">
                 <p>Adresa:</p>
-                <p>OMM:</p>
                 <p>Snaga:</p>
+                <p>OMM:</p>
+                <p>Broj brojila:</p>
                 <p>TM:</p>
             </div>
             <div class="flex flex-col shrink-0 bg-neutral-600 w-0.5 h-full"></div>
             <div class="flex flex-col text-left">
                 <p>{{ item.adresa }}</p>
+                <p>{{ item.snaga }} <span>kW</span></p>
                 <p>{{ item.OMM }}</p>
-                <p>{{ item.snaga }}</p>
+                <p>{{ item.tvbr_brojila }}</p>
                 <p>{{ item.TM }}</p>
             </div>
         </RouterLink>

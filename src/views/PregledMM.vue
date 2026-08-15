@@ -1,13 +1,21 @@
 <script setup>
-    // TODO: Napraviti pregled pojedinog mm-a, doraditi firebase
+    // TODO: Napraviti pregled pojedinog mm-a
     import Header from '@/components/Header.vue';
-    import { useRoute, RouterLink } from 'vue-router';
+    import { useRoute, RouterLink, useRouter } from 'vue-router';
 
     const route = useRoute()
+    const router = useRouter()
 </script>
 
 <template>
-    <Header></Header>
+    <Header>
+        <template #Slot1>
+            <button @click="router.back()" class="bg-emerald-600 hover:bg-emerald-500 w-fit rounded-lg font-bold text-white py-1 px-3">Nazad</button>
+        </template>
+        <template #Slot2>
+            <RouterLink :to="`/pregledmm/${route.params.mm_uid}/uredimm`" class="bg-amber-600 hover:bg-amber-500 w-fit rounded-lg font-bold text-white py-1 px-3">Uredi MM</RouterLink>
+        </template>
+    </Header>
     <br>
     <br>
     <br>

@@ -2,8 +2,10 @@ import Analitika from '@/views/Analitika.vue'
 import KreirajMM from '@/views/KreirajMM.vue'
 import Login from '@/views/Login.vue'
 import OdabirMM from '@/views/OdabirMM.vue'
+import PlacanjeRacuna from '@/views/PlacanjeRacuna.vue'
 import PregledMM from '@/views/PregledMM.vue'
 import PregledRacuna from '@/views/PregledRacuna.vue'
+import UrediMM from '@/views/UrediMM.vue'
 import UrediOcitanja from '@/views/UrediOcitanja.vue'
 import UrediUredaje from '@/views/UrediUredaje.vue'
 import { createRouter, createWebHistory } from 'vue-router'
@@ -31,6 +33,11 @@ const router = createRouter({
         name: 'pregledmm',
         component: PregledMM,
       },
+            {
+        path: '/pregledmm/:mm_uid/uredimm',
+        name: 'uredimm',
+        component: UrediMM,
+      },
       {
         path: '/pregledmm/:mm_uid/urediocitanja',
         name: 'urediocitanja',
@@ -46,6 +53,11 @@ const router = createRouter({
         name: 'pregledracuna',
         component: PregledRacuna,
       },
+      // {
+      //   path: '/pregledmm/:mm_uid/pregledracuna/{UID RACUNA}/placanjeracuna',
+      //   name: 'placanjeracuna',
+      //   component: PlacanjeRacuna,
+      // },
       {
         path: '/pregledmm/:mm_uid/analitika',
         name: 'analitika',

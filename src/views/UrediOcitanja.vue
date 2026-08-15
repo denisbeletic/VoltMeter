@@ -1,12 +1,13 @@
 <script setup>
     import Header from '@/components/Header.vue';
-    import { useRoute } from 'vue-router';
+    import { useRoute, useRouter } from 'vue-router';
     import { onMounted, ref } from 'vue';
     import { db } from '@/firebase';
     import { doc, collection, getDoc, getDocs, query, addDoc, deleteDoc, updateDoc, Timestamp, orderBy } from 'firebase/firestore';
     import { watchAuthStateChange } from '@/composables/watchAuthStateChange';
 
     const route = useRoute()
+    const router = useRouter()
 
     const date = ref(null)  // string: "yy-mm-dd"
     const VT = ref(0)
@@ -108,7 +109,11 @@
 </script>
 
 <template>
-    <Header></Header>
+    <Header>
+        <template #Slot1>
+            <button @click="router.back()" class="bg-emerald-600 hover:bg-emerald-500 w-fit rounded-lg font-bold text-white py-1 px-3">Nazad</button>
+        </template>
+    </Header>
     <div class="flex flex-row items-center justify-center h-screen gap-5">
         <form @submit.prevent="dodajOcitanje" v-if="tm_plavi" class="flex flex-col items-center justify-center bg-white py-2 px-6 h-150 rounded-2xl border-3 border-neutral-600">
             <p class="text-xl font-bold text-emerald-600 mb-5">Dodaj novo očitanje</p>

@@ -30,7 +30,7 @@
                 <span class="text-emerald-500">Meter</span>
                 <Zap color="yellow" fill="yellow" class="ml-1"></Zap>
             </RouterLink>
-            <slot name="Slot1"></slot>  <!-- TODO: implementiraj tipke na ovim slotovima -->
+            <slot name="Slot1"></slot>
             <slot name="Slot2"></slot>
         </div>
         <div class="flex flex-row items-center gap-10">

@@ -4,19 +4,24 @@
     import { db } from '@/firebase';
     import { addDoc, collection, updateDoc, Timestamp } from 'firebase/firestore';
     import { watchAuthStateChange } from '@/composables/watchAuthStateChange';
+    import { useRouter } from 'vue-router';
     
+    const router = useRouter()
+
     const adresa = ref('')
-    const snaga = ref('')
-    const OMM = ref('')
+    const snaga = ref()
+    const OMM = ref()
+    const tvbr_brojila = ref()
     const TM = ref('')
     
-    const dodajMM = async (adresa, snaga, OMM, TM) => {
+    const dodajMM = async (adresa, snaga, OMM, tvbr_brojila, TM) => {
         try {
             const user = await watchAuthStateChange()
             const novo_mm = await addDoc(collection(db, "users", user.uid, "mjerna_mjesta"), {
                 adresa: adresa,
                 snaga: snaga,
                 OMM: OMM,
+                tvbr_brojila: tvbr_brojila,
                 TM: TM
             })
     
@@ -47,9 +52,13 @@
 </script>
 
 <template>
-    <Header></Header>
+    <Header>
+        <template #Slot1>
+            <button @click="router.back()" class="bg-emerald-600 hover:bg-emerald-500 w-fit rounded-lg font-bold text-white py-1 px-3">Nazad</button>
+        </template>
+    </Header>
     <div class="flex flex-row items-center justify-center h-screen">
-        <form @submit.prevent="dodajMM(adresa, snaga, OMM, TM)" class="flex flex-col items-center justify-center bg-white py-2 px-6 rounded-2xl border-3 border-neutral-600">
+        <form @submit.prevent="dodajMM(adresa, snaga, OMM, tvbr_brojila, TM)" class="flex flex-col items-center justify-center bg-white py-2 px-6 rounded-2xl border-3 border-neutral-600">
             <p class="text-xl font-bold text-emerald-600 mb-5">Dodaj novo MM</p>
             <label class="mb-3">Upišite adresu mjernog mjesta:</label>
             <input required v-model="adresa" type="text" class="bg-neutral-200 border rounded-lg px-2 py-1 mb-3">
@@ -59,6 +68,9 @@
             <div class="w-full h-0.5 bg-neutral-600 my-2"></div>
             <label class="mb-3">Upišite OMM:</label>
             <input required v-model="OMM" type="number" class="bg-neutral-200 border rounded-lg px-2 py-1 mb-3">
+            <div class="w-full h-0.5 bg-neutral-600 my-2"></div>
+            <label class="mb-3">Upišite tvornički broj brojila:</label>
+            <input required v-model="tvbr_brojila" type="number" class="bg-neutral-200 border rounded-lg px-2 py-1 mb-3">
             <div class="w-full h-0.5 bg-neutral-600 my-2"></div>
             <label class="mb-3">Odaberite tarifni model:</label>
             <select required v-model="TM" class="bg-neutral-200 border rounded-lg px-2 py-1 mb-3">
