@@ -35,7 +35,7 @@
     <br>
     <br>
     <br>
-    <div v-if="snapshot" class="flex flex-row gap-5 mx-5 my-5">
+    <div v-if="snapshot" class="flex flex-wrap gap-5 mx-5 my-5">
         <RouterLink :to="`/pregledmm/${item.uid}`" v-for="item in OMM_data" class="flex flex-row justify-center items-center border-3 border-neutral-600 px-5 py-2 rounded-2xl bg-white hover:border-amber-500 text-lg gap-3">
             <div class="flex flex-col text-right font-bold text-emerald-600">
                 <p>Adresa:</p>

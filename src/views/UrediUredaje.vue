@@ -149,7 +149,7 @@
             </select>
             <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 w-full rounded-lg font-bold text-white py-0.5 px-3 my-2">Dodaj</button>
         </form>
-        <div class="flex flex-col justify-start items-start bg-white py-2 px-6 my-15 h-125 overflow-y-auto rounded-md border-3 border-neutral-600">
+        <div v-if="uredaji_data && uredaji_data.length > 0" class="flex flex-col justify-start items-start bg-white py-2 px-6 my-15 h-125 overflow-y-auto rounded-md border-3 border-neutral-600">
             <div v-for="item in uredaji_data" class="my-3">
                 <div class="w-full h-0.5 bg-neutral-600 my-2"></div>
                 <div class="flex flex-row gap-2">

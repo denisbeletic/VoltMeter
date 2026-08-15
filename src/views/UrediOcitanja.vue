@@ -92,7 +92,7 @@
                 ocitanja_data.value.push(podaci)
             }
 
-            for (let item of ocitanja_data.value) {   // formatiranje firestore timestamp-a natrag u string "yy-mm-dd"
+            for (let item of ocitanja_data.value) {   // formatiranje firestore timestamp-a natrag u string "yyyy-mm-dd"
                 const date_object = item.date.toDate()
                 const day = date_object.getDate()
                 const month = date_object.getMonth() + 1
@@ -169,7 +169,7 @@
             <input required v-model="P2" type="number" step="0.01" class="bg-neutral-200 border rounded-lg px-2 py-1 mb-3">
             <button type="submit" class="bg-emerald-600 hover:bg-emerald-500 w-full rounded-lg font-bold text-white py-0.5 px-3 my-2">Dodaj</button>
         </form>
-        <div class="flex flex-col justify-start items-start bg-white py-2 px-6 my-15 h-150 overflow-y-auto rounded-md border-3 border-neutral-600">
+        <div v-if="ocitanja_data && ocitanja_data.length > 0" class="flex flex-col justify-start items-start bg-white py-2 px-6 my-15 h-150 overflow-y-auto rounded-md border-3 border-neutral-600">
             <div v-for="item in ocitanja_data" class="my-3">
                 <div class="w-full h-0.5 bg-neutral-600 my-2"></div>
                 <div class="flex flex-row gap-2">
