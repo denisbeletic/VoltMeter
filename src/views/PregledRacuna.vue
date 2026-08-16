@@ -294,7 +294,7 @@
                 </div>
                 <div class="w-full h-0.5 bg-neutral-600 my-2"></div>
                 <div v-if="!item.placeno">
-                    <RouterLink :to="`/pregledmm/${route.params.mm_uid}/pregledracuna/${item.uid}/placanjeracuna`" class="flex bg-emerald-600 hover:bg-emerald-500 justify-center items-center w-full rounded-lg font-bold text-white py-0.5 px-3">Plati</RouterLink> <!-- TODO: dovrsiti placanje i izvoz u PDF -->
+                    <RouterLink :to="`/pregledmm/${route.params.mm_uid}/pregledracuna/${item.uid}/placanjeracuna`" class="flex bg-emerald-600 hover:bg-emerald-500 justify-center items-center w-full rounded-lg font-bold text-white py-0.5 px-3">Plati</RouterLink>
                     <div class="w-full h-0.5 bg-neutral-600 my-2"></div>
                 </div>
                 <button @click="izvozPDF(item.uid)" class="bg-indigo-500 hover:bg-indigo-400 w-full rounded-lg font-bold text-white py-0.5 px-3">Izvoz u PDF</button>

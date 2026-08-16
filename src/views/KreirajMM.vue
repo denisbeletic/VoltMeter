@@ -45,7 +45,7 @@
             })
             
             alert("Dodano MM!")
-            location.reload()
+            router.push('/')
         } catch (error) {
             alert("Error: " + error.message)
         }

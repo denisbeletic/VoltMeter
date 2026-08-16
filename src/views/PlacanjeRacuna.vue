@@ -24,19 +24,24 @@
     const podaci = ref(null)
 
     onMounted(async () => {
-        const user = await watchAuthStateChange()
+        try {
+            const user = await watchAuthStateChange()
+            
+            const firestore_dokument = doc(db, "users", user.uid, "mjerna_mjesta", route.params.mm_uid, "racuni", route.params.racun_uid)
+            const snapshot = await getDoc(firestore_dokument)
+            
+            podaci.value = snapshot.data()
+            
+            const date_object = podaci.value.razdoblje.toDate() // formatiranje firestore timestamp-a natrag u string "yyyy-mm"
+            const month = date_object.getMonth() + 1
+            const year = date_object.getFullYear()
+            
+            const date_string = `${year}/${month}`
+            podaci.value.razdoblje = date_string
 
-        const firestore_dokument = doc(db, "users", user.uid, "mjerna_mjesta", route.params.mm_uid, "racuni", route.params.racun_uid)
-        const snapshot = await getDoc(firestore_dokument)
-        
-        podaci.value = snapshot.data()
-
-        const date_object = podaci.value.razdoblje.toDate() // formatiranje firestore timestamp-a natrag u string "yyyy-mm"
-        const month = date_object.getMonth() + 1
-        const year = date_object.getFullYear()
-
-        const date_string = `${year}/${month}`
-        podaci.value.razdoblje = date_string
+        } catch (error) {
+            alert("Error: " + error.message)
+        }
     })
 </script>
 
