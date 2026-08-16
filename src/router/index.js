@@ -53,11 +53,11 @@ const router = createRouter({
         name: 'pregledracuna',
         component: PregledRacuna,
       },
-      // {
-      //   path: '/pregledmm/:mm_uid/pregledracuna/{UID RACUNA}/placanjeracuna',
-      //   name: 'placanjeracuna',
-      //   component: PlacanjeRacuna,
-      // },
+      {
+        path: '/pregledmm/:mm_uid/pregledracuna/:racun_uid/placanjeracuna',
+        name: 'placanjeracuna',
+        component: PlacanjeRacuna,
+      },
       {
         path: '/pregledmm/:mm_uid/analitika',
         name: 'analitika',

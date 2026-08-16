@@ -5,6 +5,7 @@
     import { addDoc, collection, updateDoc, Timestamp } from 'firebase/firestore';
     import { watchAuthStateChange } from '@/composables/watchAuthStateChange';
     import { useRouter } from 'vue-router';
+    import BackButton from '@/components/BackButton.vue';
     
     const router = useRouter()
 
@@ -54,7 +55,7 @@
 <template>
     <Header>
         <template #Slot1>
-            <button @click="router.back()" class="bg-emerald-600 hover:bg-emerald-500 w-fit rounded-lg font-bold text-white py-1 px-3">Nazad</button>
+            <BackButton></BackButton>
         </template>
     </Header>
     <div class="flex flex-row items-center justify-center h-screen">

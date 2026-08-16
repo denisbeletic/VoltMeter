@@ -1,4 +1,5 @@
 <script setup>
+    import BackButton from '@/components/BackButton.vue';
     import Header from '@/components/Header.vue';
     import { useRoute, useRouter } from 'vue-router';
     import { onMounted, ref } from 'vue';
@@ -111,7 +112,7 @@
 <template>
     <Header>
         <template #Slot1>
-            <button @click="router.back()" class="bg-emerald-600 hover:bg-emerald-500 w-fit rounded-lg font-bold text-white py-1 px-3">Nazad</button>
+            <BackButton></BackButton>
         </template>
     </Header>
     <div class="flex flex-row items-center justify-center h-screen gap-5">
