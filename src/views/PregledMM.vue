@@ -109,11 +109,10 @@
 
             for (let item of data_racuni.value) {   // formatiranje firestore timestamp-a natrag u string "yyyy-mm-dd"
                 const date_object = item.razdoblje.toDate()
-                const day = date_object.getDate()
                 const month = date_object.getMonth() + 1
                 const year = date_object.getFullYear()
 
-                const date_string = `${day}/${month}/${year}`
+                const date_string = `${year}/${month}`
                 item.razdoblje = date_string
             }
 
