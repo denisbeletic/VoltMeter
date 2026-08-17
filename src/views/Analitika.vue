@@ -50,9 +50,10 @@
             }
             
             let iteracije = 0
+            avg_potrosnja.value = 0
             for (const item of data_potrosnje.value) {  // racunanje average potrosnje u godini
                 if (item == 0) {
-                    break
+                    continue
                 }
                 iteracije += 1
                 avg_potrosnja.value += item
@@ -60,6 +61,7 @@
             if (avg_potrosnja.value != 0) {
                 avg_potrosnja.value /= iteracije
             }
+            avg_potrosnja.value = avg_potrosnja.value.toFixed(2)
 
             const ctx = graf_canvas.value.getContext("2d")
 
@@ -166,7 +168,7 @@
                             <div class="flex flex-col shrink-0 bg-neutral-600 w-0.5"></div>
                             <div class="flex flex-col text-left">
                                 <p><span>{{ avg_potrosnja }} kWh</span></p>
-                                <p><span>320 kWh</span></p>
+                                <p><span>320.00 kWh</span></p>
                             </div>
                         </div>
                         <div class="w-full h-0.5 bg-neutral-600 my-2"></div>
