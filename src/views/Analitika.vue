@@ -70,7 +70,7 @@
             }
 
             graf_instance.value = new Chart(ctx, {
-                type: "bar",
+                type: "line",
                 data: {
                     labels: labels,
                     datasets: [{
